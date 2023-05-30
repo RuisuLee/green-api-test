@@ -1,0 +1,57 @@
+.dialogue__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.dialogue__header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+  background-color: var(--grey);
+}
+
+.dialogue__main {
+  flex-grow: 1;
+  background-color: var(--chat-background-color);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow: auto;
+}
+
+.dialogue__main::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dialogue__main::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.dialogue__main::-webkit-scrollbar-thumb {
+  background-color: var(--dark-grey);
+}
+
+.dialogue__send-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: var(--grey);
+  height: 50px;
+}
+
+.dialogue__input,
+.dialogue__input input {
+  width: 100%;
+}
+
+.dialogue__send {
+  width: 24px;
+  height: 24px;
+  margin-left: 25px;
+  cursor: pointer;
+}

@@ -1,0 +1,13 @@
+.general-button {
+  height: 30px;
+  width: 130px;
+  background-color: var(--dark-green);
+  border: 1px solid transparent;
+  color: var(--white);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.general-button:hover {
+  background-color: var(--hovered-dark-green);
+}
