@@ -1,0 +1,14 @@
+.chat__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.chat__header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+  background-color: var(--grey);
+}

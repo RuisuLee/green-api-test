@@ -1,0 +1,18 @@
+.main__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.main__welcome {
+  font-size: 30px;
+  color: var(--dark-green);
+  margin-bottom: 20px;
+}
+
+.main__login {
+  color: var(--dark-green);
+  text-decoration: none;
+}

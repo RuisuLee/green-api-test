@@ -6,4 +6,5 @@ export interface IChat {
 export interface IMessage {
   text: string;
   time: number;
+  type: "input" | "output";
 }

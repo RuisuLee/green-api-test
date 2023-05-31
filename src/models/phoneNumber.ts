@@ -1,17 +1,26 @@
 import { createEffect, createEvent, createStore, sample } from "effector";
 import { IPhoneNumber } from "../types/PhoneNumber";
 
-const defaultPhone: IPhoneNumber = {
-  number: "",
+const getPhone = () => {
+  const chatId = localStorage.getItem("chatId");
+  if (chatId) {
+    return {
+      number: chatId.slice(0, 11),
+    };
+  } else {
+    return {
+      number: "",
+    };
+  }
 };
 
+const defaultPhone: IPhoneNumber = getPhone();
+
 const sendPhoneNumberFormFx = createEffect((params: IPhoneNumber) => {
+  localStorage.setItem("chatId", `${params.number}@c.us`);
   console.log(params);
 });
 export const submittedPhoneNumberForm = createEvent<any>();
-submittedPhoneNumberForm.watch((e) => {
-  e.preventDefault();
-});
 export const setPhoneNumberField = createEvent<any>();
 export const $phone = createStore<IPhoneNumber>(defaultPhone).on(
   setPhoneNumberField,

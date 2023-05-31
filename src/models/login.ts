@@ -1,18 +1,25 @@
 import { createEffect, createEvent, createStore, sample } from "effector";
 import { ILoginForm } from "../types/LoginForm";
 
-const defaultLoginForm: ILoginForm = {
-  id: "",
-  apiToken: "",
+export const getCreds = () => {
+  const id = localStorage.getItem("id") || "";
+  const apiToken = localStorage.getItem("apiToken") || "";
+  return {
+    id,
+    apiToken,
+  };
 };
+
+const defaultLoginForm: ILoginForm = getCreds();
 
 const sendLoginFormFx = createEffect((params: ILoginForm) => {
   console.log(params);
+  localStorage.setItem("id", params.id);
+  localStorage.setItem("apiToken", params.apiToken);
 });
+
 export const submittedLoginForm = createEvent<any>();
-submittedLoginForm.watch((e) => {
-  e.preventDefault();
-});
+
 export const setLoginFormField = createEvent<any>();
 export const $loginForm = createStore<ILoginForm>(defaultLoginForm).on(
   setLoginFormField,

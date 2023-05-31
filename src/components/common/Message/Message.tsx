@@ -3,7 +3,7 @@ import "./Message.css";
 interface IMessageProps {
   id?: string;
   text: string;
-  time: string;
+  time: number;
   type: "input" | "output";
 }
 

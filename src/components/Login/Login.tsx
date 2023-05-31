@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   $loginForm,
   setLoginFormField,
@@ -7,8 +8,13 @@ import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    submittedLoginForm();
+    navigate("/create-chat");
+  };
   return (
-    <form className="form__wrapper" onSubmit={submittedLoginForm}>
+    <form className="form__wrapper" onSubmit={handleSubmit}>
       <header className="form__header">Логин</header>
       <Input
         name="id"
