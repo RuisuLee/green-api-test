@@ -1,8 +1,6 @@
-import { Input } from "../common/Input/Input";
-import send from "../../assets/send.svg";
-
 import "./Dialogue.css";
 import { Message } from "../common/Message/Message";
+import { SendMessage } from "../SendMessage/SendMessage";
 
 export const Dialogue = () => {
   const messages = [
@@ -74,15 +72,7 @@ export const Dialogue = () => {
           ></Message>
         ))}
       </main>
-      <div className="dialogue__send-wrapper">
-        <Input
-          name="message"
-          labelText=""
-          placeholdetText="Введите сообщение"
-          className="dialogue__input"
-        ></Input>
-        <img src={send} alt="Отправить" className="dialogue__send" />
-      </div>
+      <SendMessage></SendMessage>
     </div>
   );
 };

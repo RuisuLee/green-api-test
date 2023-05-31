@@ -7,7 +7,7 @@ function App() {
     <>
       {/* <Login></Login> */}
       {/* <CreateChat></CreateChat> */}
-      {/* <Dialogue></Dialogue> */}
+      <Dialogue></Dialogue>
     </>
   );
 }
