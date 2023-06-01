@@ -1,0 +1,20 @@
+.chat-history__main {
+  flex-grow: 1;
+  background-color: var(--chat-background-color);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow: auto;
+}
+
+.chat-history__main::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chat-history__main::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.chat-history__main::-webkit-scrollbar-thumb {
+  background-color: var(--dark-grey);
+}
