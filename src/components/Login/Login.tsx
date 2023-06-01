@@ -21,6 +21,7 @@ export const Login = () => {
         labelText="id"
         placeholdetText="Введите idInstance"
         className="form__input"
+        required={true}
         $form={$loginForm}
         setField={setLoginFormField}
       ></Input>
@@ -29,6 +30,7 @@ export const Login = () => {
         labelText="apiToken"
         placeholdetText="Введите apiTokenInstance"
         className="form__input"
+        required={true}
         $form={$loginForm}
         setField={setLoginFormField}
       ></Input>

@@ -6,14 +6,15 @@ import "./ChatHistory.css";
 
 export const ChatHistory = () => {
   const messages = useList($messages, {
-    fn: (message) => (
-      <Message
-        key={message.time}
-        text={message.text}
-        type={message.type}
-        time={message.time}
-      ></Message>
-    ),
+    fn: (message) =>
+      message && (
+        <Message
+          key={message.time}
+          text={message.text}
+          type={message.type}
+          time={message.time}
+        ></Message>
+      ),
     keys: [],
     placeholder: <div>Тут пока ничего нет..</div>,
   });

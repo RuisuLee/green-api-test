@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "./axios";
 import { ISendMessageParams } from "../types/SendMessage";
 
 export const sendMessage = async (
@@ -11,7 +11,10 @@ export const sendMessage = async (
       chatId: data.chatId,
       message: data.message,
     },
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: false,
   });
-  console.log(res);
-  return "";
+  return res.statusText;
 };

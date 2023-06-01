@@ -19,6 +19,7 @@ export function Input({
   placeholdetText,
   className,
   type,
+  required,
   $form,
   setField,
 }: IInputProps) {
@@ -45,6 +46,7 @@ export function Input({
           placeholder={placeholdetText}
           value={value}
           onChange={handleChange}
+          required={required}
         ></InputMask>
       ) : (
         <input
@@ -54,6 +56,7 @@ export function Input({
           name={name}
           placeholder={placeholdetText}
           value={value}
+          required={required}
           onChange={handleChange}
         ></input>
       )}

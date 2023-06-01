@@ -1,3 +1,4 @@
+import { timeConverter } from "../../../helpers/timeConverter";
 import "./Message.css";
 
 interface IMessageProps {
@@ -15,7 +16,7 @@ export const Message = ({ text, time, type }: IMessageProps) => {
       }`}
     >
       <div>{text}</div>
-      <div className="message__time">{time}</div>
+      <div className="message__time">{timeConverter(time)}</div>
     </div>
   );
 };

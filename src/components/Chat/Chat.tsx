@@ -6,6 +6,7 @@ import { $phone } from "../../models/phoneNumber";
 import { useEffect } from "react";
 import { $loginForm } from "../../models/login";
 import { useNavigate } from "react-router-dom";
+import { startPooling } from "../../models/message";
 
 export const Chat = () => {
   const navigate = useNavigate();
@@ -19,6 +20,12 @@ export const Chat = () => {
     if (!creds) {
       navigate("/");
     }
+
+    const intervalId = setInterval(startPooling, 2000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
   return (
     <div className="chat__wrapper">

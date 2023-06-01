@@ -1,9 +1,10 @@
-import axios from "axios";
+import { axios } from "./axios";
 import { INotification } from "../types/Notification";
 
 export const recieveMessage = async (
   id: string,
-  apiToken: string
+  apiToken: string,
+  chatId: string
 ): Promise<INotification | undefined> => {
   try {
     const notification = await recieveNotification(id, apiToken);
@@ -16,7 +17,8 @@ export const recieveMessage = async (
         );
         if (
           deleteResult &&
-          notification.body.typeWebhook === "outgoingMessageReceived"
+          notification.body.typeWebhook === "outgoingMessageReceived" &&
+          notification.body.senderData.chatId === chatId
         ) {
           return notification;
         }
@@ -36,6 +38,7 @@ const recieveNotification = async (
   const res = await axios({
     url: `waInstance${id}/receiveNotification/${apiToken}`,
     method: "GET",
+    withCredentials: false,
   });
   return res.data;
 };
@@ -48,7 +51,7 @@ const deleteNotification = async (
   const res = await axios({
     method: "delete",
     url: `/waInstance${id}/deleteNotification/${apiToken}/${notificationId}`,
+    withCredentials: false,
   });
-  console.log(res.data);
   return res.data.result;
 };

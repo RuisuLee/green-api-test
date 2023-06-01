@@ -5,33 +5,38 @@ import {
   merge,
   sample,
 } from "effector";
-import { $phone } from "./phoneNumber";
+import { $phone, getChatId } from "./phoneNumber";
 import { IMessage } from "../types/Chat";
+import { getCreds } from "./login";
+import { sendMessage } from "../api/sendMessage";
+import { recieveMessage } from "../api/recieveMessage";
 
-export const messagesLoadFx = createEffect<void, IMessage[], Error>(() => {
-  // const history = loadHistory()
-  // await wait()
-  return [];
+export const messageLoadFx = createEffect<any, any, Error>(async () => {
+  const creds = getCreds();
+  const message = await recieveMessage(creds.id, creds.apiToken, getChatId());
+  if (message?.receiptId) {
+    return {
+      text: message.body.messageData.textMessageData.textMessage,
+      time: message.body.timestamp,
+      type: "input",
+    };
+  }
 });
 
-export const messageSendFx = createEffect<void, IMessage, Error>(
-  (params: any) => {
-    console.log(params);
-    return {} as IMessage;
+export const messageSendFx = createEffect<any, IMessage, Error>(
+  async (message) => {
+    const creds = getCreds();
+    const res = await sendMessage({
+      id: creds.id,
+      apiToken: creds.apiToken,
+      message: message.text,
+      chatId: getChatId(),
+    });
+    if (res === "OK") {
+      return message;
+    }
   }
 );
-// async ({text, author}: SendMessage) => {
-//   const message: Message = {
-//     id: createOid(),
-//     author,
-//     timestamp: Date.now(),
-//     text,
-//   }
-//   const history = await messagesLoadFx()
-//   await wait()
-//   saveHistory([...history, message])
-//   return message
-// },
 
 export const $messageText = createStore("");
 export const $messages = createStore<IMessage[]>([]);
@@ -40,16 +45,15 @@ export const messageTextChanged = createEvent<string>();
 export const messageSendClicked = createEvent();
 export const messageEnterPressed = createEvent();
 
+export const startPooling = createEvent();
+
 $messageText
   .on(messageTextChanged, (_, text) => text)
   .on(messageSendFx, () => "");
 
-$messages
-  .on(messagesLoadFx.doneData, (_, messages) => messages)
-  .on(messageSendFx.doneData, (messages, newMessage) => [
-    ...messages,
-    newMessage,
-  ]);
+const messageAdded = merge([messageLoadFx.doneData, messageSendFx.doneData]);
+
+$messages.on(messageAdded, (messages, newMessage) => [...messages, newMessage]);
 
 const messageSend = merge([messageEnterPressed, messageSendClicked]);
 
@@ -60,8 +64,13 @@ sample({
   fn: (message) => {
     return {
       text: message.text,
-      timestamp: Date.now(),
+      time: Date.now(),
       type: "output",
     };
   },
+});
+
+sample({
+  clock: startPooling,
+  target: messageLoadFx,
 });
