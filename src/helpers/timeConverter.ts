@@ -1,7 +1,8 @@
 export const timeConverter = (UNIX_timestamp: number) => {
-  var a = new Date(UNIX_timestamp);
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var time = hour + ":" + min;
+  const a = new Date(UNIX_timestamp);
+  const hour = a.getHours();
+  const minutes = a.getMinutes();
+  const min = minutes < 10 ? `0${minutes}` : minutes;
+  const time = hour + ":" + min;
   return time;
 };

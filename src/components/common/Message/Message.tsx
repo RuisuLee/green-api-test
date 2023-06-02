@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { timeConverter } from "../../../helpers/timeConverter";
 import "./Message.css";
 
@@ -9,8 +10,15 @@ interface IMessageProps {
 }
 
 export const Message = ({ text, time, type }: IMessageProps) => {
+  const refMessage = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (refMessage.current) {
+      refMessage.current.scrollIntoView();
+    }
+  }, []);
   return (
     <div
+      ref={refMessage}
       className={`message ${
         type === "input" ? "message--input" : "message--output"
       }`}

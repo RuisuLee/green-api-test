@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "../common/Button/Button";
+import { Input } from "../common/Input/Input";
 import {
   $loginForm,
   setLoginFormField,
   submittedLoginForm,
 } from "../../models/login";
-import { Button } from "../common/Button/Button";
-import { Input } from "../common/Input/Input";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ export const Login = () => {
         required={true}
         $form={$loginForm}
         setField={setLoginFormField}
+        type="password"
       ></Input>
       <Button
         buttonText="Войти"
